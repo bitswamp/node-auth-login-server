@@ -1,0 +1,8 @@
+{
+    "port": 80
+  , "cookieSecret": "defaultsecret"
+  , "cookieOptions": { "domain": ".example.com" }
+  , "domain": "example.com"
+  , "subdomain": "login"
+  , "emailFilter": "@example.com"
+}
