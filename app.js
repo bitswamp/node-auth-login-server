@@ -33,7 +33,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
+app.get('/', routes.login);
+app.get('/account', routes.account);
 app.get('/logout', routes.logout);
 
 app.get('/google', passport.authenticate('google'));
@@ -58,8 +59,10 @@ passport.use(new GoogleStrategy({
         profile.id = identifier;
 
         if (profile.emails
-            && profile.emails[0].value.indexOf(config.emailFilter) > -1)
+            && profile.emails[0].value.indexOf(config.emailFilter) > -1) {
+            profile.authname = profile.emails[0].value;
             done(null, profile);
+        }
         else
             done({ message: "Invalid login" });
     }
