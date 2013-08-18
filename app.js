@@ -34,7 +34,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.login);
-app.get('/account', routes.account);
+app.get('/account', req.isAuthenticated(), routes.account);
 app.get('/logout', routes.logout);
 
 app.get('/google', passport.authenticate('google'));
@@ -43,7 +43,7 @@ app.get('/google/return',
     function(req, res) { 
         if (req.session.redirectUrl) {
             var url = req.session.redirectUrl;
-            req.session.redirectUrl = null;
+            req.session.redirectUrl = "";
             res.redirect(url);
         } else {
             res.redirect('/'); 

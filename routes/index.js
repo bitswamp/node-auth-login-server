@@ -1,12 +1,21 @@
 exports.login = function(req, res) {
-    res.render('login', {});
+    var loggedout = req.session.loggedout;
+
+    if (loggedout)
+        req.session.loggedout = "";
+
+    res.render('login', {
+        user: req.user,
+        loggedout: loggedout
+    });
 };
 
 exports.account = function(req, res,) {
-    res.render('account', {});
+    res.render('account', { user: req.user });
 }
 
 exports.logout = function(req, res) {
     req.logout();
+    req.session.loggedout = true;
     res.redirect('/');
 }

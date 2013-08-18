@@ -2,5 +2,13 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
-  p a(href='/google') Please log in
+  if (user)
+    p You are logged in as 
+      a(href='/account') {user.authname}
+    p a(href='/logout') Click here to log out.
+  else if (logout)
+    p You have logged out.
+    p a(href='/google') Click here to log in again.
+  else
+    p This site is protected.   
+    p a(href='/google') Please log in with your Google account.
